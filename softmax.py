@@ -31,7 +31,11 @@ def compute_probabilities(X, theta, temp_parameter):
     Returns:
         H - (k, n) NumPy array, where each entry H[j][i] is the probability that X[i] is labeled as j
     """
-    #YOUR CODE HERE
+    H0=np.dot(theta,X.T)/temp_parameter
+    c=np.max(H0,axis=0)
+    H1=np.exp(H0-c)
+    Hf=(1/(np.sum(H1,axis=0)))*H1
+    return H
     raise NotImplementedError
 
 def compute_cost_function(X, Y, theta, lambda_factor, temp_parameter):
@@ -50,7 +54,12 @@ def compute_cost_function(X, Y, theta, lambda_factor, temp_parameter):
     Returns
         c - the cost value (scalar)
     """
-    #YOUR CODE HERE
+    LossMatrix=np.log(compute_probabilities(X, theta, temp_parameter))
+    Reg=(lambda_factor/2)*np.sum(theta**2)
+    N=X.shape[0]
+    Loss=np.sum(LossMatrix[Y,range(N)])
+    c=(-1/N)*Loss+Reg
+    return c
     raise NotImplementedError
 
 def run_gradient_descent_iteration(X, Y, theta, alpha, lambda_factor, temp_parameter):
@@ -70,7 +79,17 @@ def run_gradient_descent_iteration(X, Y, theta, alpha, lambda_factor, temp_param
     Returns:
         theta - (k, d) NumPy array that is the final value of parameters theta
     """
-    #YOUR CODE HERE
+    n=X.shape[0]
+    k=theta.shape[0]
+    NabJ=np.zeros((k,theta.shape[1]))
+    def I(y,m):
+        return 1 if y==m else 0
+    for m in range(k):
+        Sum=np.zeros((X.shape[1],))
+        for i in range(n):
+            Sum+=X[i,:]*(I(Y[i],m)-compute_probabilities(X, theta, temp_parameter)[m,i])
+        NabJ[m,:]=(-1/(temp_parameter*n))*Sum+lambda_factor*theta[m,:]
+    return theta-alpha*NabJ
     raise NotImplementedError
 
 def update_y(train_y, test_y):
