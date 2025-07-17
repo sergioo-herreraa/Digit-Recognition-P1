@@ -15,8 +15,12 @@ def one_vs_rest_svm(train_x, train_y, test_x):
     Returns:
         pred_test_y - (m,) NumPy array containing the labels (0 or 1) for each test data point
     """
-    raise NotImplementedError
-
+    clf=LinearSVC(C=0.1,random_state=0) #C es un parámetro que se usa para controlar el "overfitting" o el "underfitting". random_state es un parámetro que se usa
+                                        #para controlar la aleatoriedad en la inicialización de los parámetros del modelo predictivo empleado por el algoritmo. Un valor
+                                        #constante de random_state permite que los resultados sean más reproducibles, pues la incialización comienza siempre en "el mismo punto"
+    clf.fit(train_x,train_y)
+    pred_test_y=clf.predict(test_x)
+    return pred_test_y
 
 def multi_class_svm(train_x, train_y, test_x):
     """
