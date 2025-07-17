@@ -19,7 +19,7 @@ def polynomial_kernel(X, Y, c, p):
         Returns:
             kernel_matrix - (n, m) Numpy array containing the kernel matrix
     """
-    # YOUR CODE HERE
+    return (np.dot(X,Y.T)+c)**p
     raise NotImplementedError
 
 
