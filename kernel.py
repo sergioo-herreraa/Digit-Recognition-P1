@@ -38,5 +38,15 @@ def rbf_kernel(X, Y, gamma):
         Returns:
             kernel_matrix - (n, m) Numpy array containing the kernel matrix
     """
-    # YOUR CODE HERE
+    def squared_norms(X,Y):  
+        def substract(x,y):
+            return x-y
+        Substract=np.vectorize(substract)
+        Submat=[]
+        for i in range(X.shape[0]):
+            Submat.append(Substract(X[i],Y)) 
+        S=np.array(Submat) 
+        norms=np.linalg.norm(S,axis=2)  
+        return norms**2  
+    return np.exp(-gamma*squared_norms(X,Y))
     raise NotImplementedError
