@@ -3,6 +3,7 @@ import numpy as np
 ### Functions for you to fill in ###
 
 def closed_form(X, Y, lambda_factor):
+def closed_form(X, Y, lambda_factor):
     """
     Computes the closed form solution of linear regression with L2 regularization
 
@@ -16,6 +17,11 @@ def closed_form(X, Y, lambda_factor):
         represents the y-axis intercept of the model and therefore X[0] = 1
     """
     # YOUR CODE HERE
+    XTX=np.dot(X.transpose(),X)
+    I=np.identity(XTX.shape[0])
+    XTXpLI=XTX+lambda_factor*I
+    Theta=np.dot(np.linalg.inv(XTXpLI),np.dot(X.transpose(),Y))
+    return Theta
     raise NotImplementedError
 
 ### Functions which are already complete, for you to use ###
