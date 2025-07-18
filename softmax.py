@@ -35,7 +35,7 @@ def compute_probabilities(X, theta, temp_parameter):
     c=np.max(H0,axis=0)
     H1=np.exp(H0-c)
     Hf=(1/(np.sum(H1,axis=0)))*H1
-    return H
+    return Hf
     raise NotImplementedError
 
 def compute_cost_function(X, Y, theta, lambda_factor, temp_parameter):
