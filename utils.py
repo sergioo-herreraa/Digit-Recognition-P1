@@ -47,7 +47,7 @@ def read_pickle_data(file_name):
     f.close()
     return data
 
-def get_MNIST_data():
+def get_MNIST_data(path='../Datasets/mnist.pkl.gz'):
     """
     Reads mnist dataset from file
 
@@ -58,7 +58,7 @@ def get_MNIST_data():
         test_y  - 1D Numpy array (n, ) where each row is a label
 
     """
-    train_set, valid_set, test_set = read_pickle_data('../Datasets/mnist.pkl.gz')
+    train_set, valid_set, test_set = read_pickle_data(path)
     train_x, train_y = train_set
     valid_x, valid_y = valid_set
     train_x = np.vstack((train_x, valid_x))
