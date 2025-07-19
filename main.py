@@ -192,7 +192,13 @@ plot_images(train_x[1, ])
 
 
 ## Cubic Kernel ##
-# TODO: Find the 10-dimensional PCA representation of the training and test set
+n_components = 10
+
+###Correction note:  the following 4 lines have been modified since release.
+train_x_centered, feature_means = center_data(train_x)
+pcs = principal_components(train_x_centered)
+train_pca10 = project_onto_PC(train_x, pcs, n_components, feature_means)
+test_pca10 = project_onto_PC(test_x, pcs, n_components, feature_means)
 
 
 # TODO: First fill out cubicFeatures() function in features.py as the below code requires it.
