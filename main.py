@@ -188,7 +188,7 @@ plot_images(train_x[1, ])
 
 
 #######################################################################
-# Cubic Kernel
+# Cubic Features (10-dimensional cubic PCA features)
 #######################################################################
 n_components = 10
 
@@ -202,3 +202,8 @@ theta, cost_function_history = softmax_regression(train_cube, train_y, temp_para
 test_error = compute_test_error(test_cube, test_y, theta, temp_parameter)
 
 print("Error rate for 10-dimensional PCA features: ", test_error)
+
+#######################################################################
+# Polynomial SVM Using scikit-learn
+#######################################################################
+multi_class_svm(train_pca10, train_y, test_pca10)
