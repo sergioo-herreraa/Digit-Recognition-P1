@@ -206,4 +206,11 @@ print("Error rate for 10-dimensional PCA features: ", test_error)
 #######################################################################
 # Polynomial SVM Using scikit-learn
 #######################################################################
-multi_class_svm(train_pca10, train_y, test_pca10)
+preds_y = multi_class_svm(train_pca10, train_y, test_pca10, kernel='poly', degree='3')
+print(compute_test_error_svm(test_y, preds_y))
+
+#######################################################################
+# RBF SVM Using scikit-learn
+#######################################################################
+preds_y = multi_class_svm(train_pca10, train_y, test_pca10, kernel='rbf')
+print(compute_test_error_svm(test_y, preds_y))
